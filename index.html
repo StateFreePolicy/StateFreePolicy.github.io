@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+  <title>Do You Need Proprioceptive States in Visuomotor Policies?</title>
+  <style>
+    body {
+      font-family: "Georgia", serif;
+      background-color: #f8f7f2;
+      color: #111;
+      margin: 60px 60px;
+      font-size: 20px;
+      display: flex;
+      justify-content: center;
+    }
+    .container {
+      max-width: 1600px; /* 页面内容最大宽度 */
+      width: 100%;
+    }
+    h1 {
+      font-size: 4.4em;  /* 标题再稍微大一些 */
+      font-weight: 600;
+      line-height: 1.3;
+    }
+    .meta {
+      margin-top: 50px;
+      font-size: 1.8em; /* Published 更大 */
+    }
+    .abstract {
+      margin-top: 50px;
+      font-size: 1.8em; /* Published 更大 */
+      text-align: justify;  /* 两端对齐 */
+    }
+    .section {
+      margin-top: 50px;
+      font-size: 1.8em; /* Published 更大 */
+      text-align: justify;  /* 两端对齐 */
+    }
+    .bibtex {
+      font-size: 3em;
+      margin-top: 50px;
+      font-size: 1.8em; /* Published 更大 */
+      text-align: justify;  /* 两端对齐 */
+    }
+    .authors {
+      margin-top: 30px;
+      margin-bottom: 40px;
+      font-size: 1.4em;
+      text-align: left;  /* 左对齐 */
+      line-height: 1.6;
+    }
+    .authors sup {
+      font-size: 0.9em;
+    }
+    .authors .notes {
+      font-size: 0.9em;
+      margin-top: 10px;
+      font-style: italic;
+    }
+    .authors .affiliations {
+      font-size: 0.9em;
+      margin-top: 10px;
+      line-height: 1.4;
+    }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 50px;
+      padding: 10px 34px;
+      border: 2px dashed #555;
+      font-family: monospace;
+      font-size: 1.8em;  /* Paper 按钮字体更大 */
+      background: #f8f7f2;
+      cursor: pointer;
+      text-decoration: none;
+      color: #111;
+    }
+    .button:hover {
+      background: #eaeaea;
+    }
+    .button img {
+      height: 1.6em; /* 图标高度随文字缩放 */
+      width: auto;
+    }
+  </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Do You Need Proprioceptive States<br>in Visuomotor Policies?</h1>
+
+        <!-- 作者信息 -->
+        <div class="authors">
+        <p>
+            Juntu Zhao<sup>1,2*</sup>, Wenbo Lu<sup>2,4*</sup>, Di Zhang<sup>2,5</sup>, 
+            Yufeng Liu<sup>1,2</sup>, Yushen Liang<sup>4</sup>, Tianluo Zhang<sup>4</sup>, 
+            Yifeng Cao<sup>2</sup>, Junyuan Xie<sup>2</sup>, <br>Yingdong Hu<sup>2,3</sup>, 
+            Shengjie Wang<sup>4</sup>, Junliang Guo<sup>2‡</sup>, 
+            Dequan Wang<sup>1†</sup> and Yang Gao<sup>2,3†</sup>
+        </p>
+
+        <p class="notes">
+            * Equal Contribution,<br>
+            * This work was done during the internship at <a href="https://spirit-ai.com" target="_blank">Spirit AI</a>,<br>
+            † Corresponding authors,<br>
+            ‡ Project leader.
+        </p>
+
+        <p class="affiliations">
+            <sup>1</sup> Shanghai Jiao Tong University,
+            <sup>2</sup> Spirit AI,
+            <sup>3</sup> Tsinghua University,  
+            <sup>4</sup> New York University Shanghai,  
+            <sup>5</sup> Tongji University.
+        </p>
+        </div>
+
+        <div class="meta">
+        <div><strong>Published</strong> &nbsp; June 9, 2025</div>
+        </div>
+
+        <div>
+        <a href="https://arxiv.org/abs/XXXX.XXXXX" class="button">
+            <img src="imgs/arxiv.png" alt="arXiv logo"> Paper
+        </a>
+        </div>
+
+        <div class="abstract">
+        <strong>Abstract</strong>
+        Imitation-learning–based visuomotor policies have been widely used in robot manipulation, where both visual observations and proprioceptive states are typically adopted together for precise control. However, in this study, we find this common practice makes the policy overly reliant on the proprioceptive state input, which causes overfitting to the training trajectories and results in poor spatial generalization. On the contrary, we propose the State-free Policy, removing the proprioceptive state and predicting actions only conditioned on visual observations. The State-free Policy is built in the relative end-effector action space, and should ensure the full task-relevant visual observations, here provided by dual wide-angle wrist cameras. Empirical results demonstrate that the State-free policy achieves significantly stronger spatial generalization than the state-based policy: in real-world tasks such as pick-and-place, challenging shirt-folding, and complex whole-body manipulation, spanning multiple robot embodi- ments, the average success rate improves from 0% to 85% in height generalization and from 6% to 64% in horizontal generalization. Furthermore, they also show advantages in data efficiency and cross-embodiment adaptation, enhancing their practicality for real-world deployment.
+        </div>
+
+        <div class="section">
+        Proprioceptive states provide direct and accurate robot configuration, but may act as shortcuts, where the policy directly associates absolute states with expert trajectories. Consequently, the policy tends to overfit to the training trajectories and fails to adapt to spatial layout changes. In this study, we propose the <strong>"State-free Policy"</strong>, removing the state input from visuomotor policies, based on the relative EEF action space and full task observation. This improves the spatial gener- alization without requiring additional architectural changes or costly diverse data collection:
+        </div>
+
+        <div class="section">
+        <strong>Relative EEF Action Space</strong>&nbsp;
+            In the relative end-effector (EEF) action space, the end-effector pose at time \(t\) is
+            \(
+            \mathbf{p}_t = \big[ \mathbf{x}_t, \mathbf{q}_t \big]
+            \)
+            , where \(\mathbf{x}_t \in \mathbb{R}^3\) is the Cartesian position and \(\mathbf{q}_t \in SO(3)\) is the orientation. The policy outputs a relative displacement:
+            \[
+            \mathbf{a}_t = \Delta \mathbf{p}_t = \big[ \Delta \mathbf{x}_t, \Delta \mathbf{q}_t \big],
+            \]
+            where \(\Delta \mathbf{x}_t\) and \(\Delta \mathbf{q}_t\) denote the translation and rotation components. The next end-effector pose is updated by:
+            \(
+            \mathbf{p}_{t+1} = \mathbf{p}_t \oplus \Delta \mathbf{p}_t
+            \)
+            , where \(\oplus\) denotes the composition of translation and rotation.
+            The policy predicts relative end-effector motions directly from observations.
+            The action \(\Delta \mathbf{p}_t\) depends only on the observations, not on the absolute pose, 
+            so identical observations yield the same displacement regardless of absolute robot poses.
+            This invariance allows relative EEF actions to support spatial generalization across heights and horizontal positions.
+        </div>
+
+        <div class="section" style="margin-top: 50px; text-align: justify; text-justify: inter-word;">
+
+          
+            <!-- 浮动图 + 标题 -->
+            <div style="float: left; width: 700px; margin-right: 20px; margin-bottom: 10px; text-align: justify;">
+              <img src="imgs/camera.svg" alt="Camera Setup" style="width: 100%; height: auto;">
+              <div style="margin-top: 5px; font-style: italic; color: #555; text-align: justify;">
+                <strong>Figure 3.</strong> (a) Normal wrist-camera setting. Sometimes the target may not be visible. (b) Dual wide-angle wrist-cameras setting. It provides sufficient observations of the task.
+              </div>
+            </div>
+          
+            <strong>Full Task Observation</strong>&nbsp;
+            Another key condition for State-free Policies is full task observation, ensuring the policy receives sufficient visual information. 
+            With state input, the policy can directly learn shortcut associations, such as which action to take once the robot reaches a certain configuration, without relying on sufficient visual information. 
+            In contrast, without state input, the policy must make decisions entirely from visual information, which requires providing full task-relevant visual observations, i.e., the full task observation. 
+            This motivates equipping the end-effector with a broader field of view for a wide range of scenarios. 
+            Our camera system consists of an overhead camera and wrist-cameras. 
+            In the normal wrist-camera setting, a single normal-view wrist-camera is mounted on top of the end-effector (in this study with field of view \(87^\circ \times 58^\circ\)). 
+            To achieve full task observation, we adopt dual wide-angle wrist-cameras (field of view \(120^\circ \times 120^\circ\)) mounted on the top and bottom of the end-effector. 
+            This setting expands the view and exposes the workspace beneath the end-effector. 
+            Note that for simple tasks, e.g., involving single task-relevant object, the normal wrist-camera setting can already be sufficient.
+          
+            <!-- 清除浮动，保证后续段落正常显示 -->
+            <div style="clear: both;"></div>
+          
+        </div>
+          
+
+        <div class="section">
+        To evaluate the effectiveness of our State-free Policies, we have conducted extensive experiments (especially real-world tasks) with data collected under strictly controlled conditions. 
+        This ensures that the observed spatial generalization ability arises from the model itself rather than relying on highly diverse training data. 
+        Beyond improved spatial generalization, we further demonstrate that these policies exhibit higher data efficiency and better cross-embodiment adaptation. 
+        Interestingly, we also find that removing the overhead camera can further enhance the policy's spatial generalization performance.
+        </div>
+
+        <div class="section">
+        <strong>Pick and Place Tasks</strong><br>
+        <div class="figure" style="margin-top: 20px; text-align: center;">
+            <img src="imgs/exp_pick_place.svg" alt="Pick and Place Generalization" style="max-width: 100%; height: auto;">
+            <div style="margin-top: 10px; text-align: justify; text-justify: inter-word; font-style: italic; margin-bottom: 10px; color: #555;">
+              <strong>Figure 4.</strong> The height and horizontal generalization (written as Gen.) performances across 3 real-world “Pick & Place” tasks. With full task observation, State-free Policies show significantly improved spatial generalization than state-based policies.
+            </div>
+        </div>
+        Our experiments on real-world "Pick and Place" tasks demonstrate that, under the full task observation condition, State-free Policies achieve significant improvements in both height and horizontal spatial generalization than state-based policies. 
+        For instance, in the "Pick Pen" task, the success rate for height generalization rises from 0 to 0.98, and for horizontal generalization from 0 to 0.58. 
+        Compared with the normal wrist-camera setting, the height generalization success rate improves from 0.87 to 0.98, and the horizontal generalization from 0.27 to 0.58.
+        </div>
+
+        <div class="section">
+            <strong>Challenging Tasks</strong><br>
+          
+            <!-- 三线表 -->
+            <table style="width: 100%; border-collapse: collapse; margin: 20px 0; text-align: center;">
+                <caption style="caption-side: top; text-align: justify; text-justify: inter-word; font-style: italic; margin-bottom: 10px; color: #555;">
+                <strong>Table 1.</strong> The horizontal generalization performances across 2 challenging real-world tasks, <em>"Fold Shirt"</em> and <em>"Fetch Bottle (whole-body)"</em>. State-free Policies still show significantly improved performance compared to state-based policies.
+              </caption>
+              <thead>
+                <tr>
+                  <th style="border-top: 2px solid #000; border-bottom: 2px solid #000; text-align: left; padding: 8px;">Task name</th>
+                  <th style="border-top: 2px solid #000; border-bottom: 2px solid #000; padding: 8px;"><em>Fold Shirt</em></th>
+                  <th style="border-top: 2px solid #000; border-bottom: 2px solid #000; padding: 8px;"><em>Fetch Bottle</em></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="padding: 8px; text-align: left;">w/ state (normal wrist-camera)</td>
+                  <td style="padding: 8px;">0.183</td>
+                  <td style="padding: 8px;">0.117</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px; text-align: left;">w/o state (normal wrist-camera)</td>
+                  <td style="padding: 8px; font-weight: bold;">0.834</td>
+                  <td style="padding: 8px; font-weight: bold;">0.784</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="3" style="border-top: 2px solid #000;"></td>
+                </tr>
+              </tfoot>
+            </table>
+          
+            Due to hardware limitations, we only evaluate horizontal spatial generalization in the more challenging "Fold Shirt" and "Fetch Bottle" (whole-body) tasks. 
+            In these tasks, State-free Policies also significantly outperform state-based policies.
+          </div>
+        
+
+          <div class="section" style="display: flex; align-items: center; gap: 20px; margin-top: 50px;">
+
+            <!-- 左侧图 + 标题 -->
+            <div style="flex: 0 0 45%;">
+              <img src="imgs/data_scale.svg" alt="Data Efficiency" style="width: 100%; height: auto;">
+              <div style="margin-top: 10px; text-align: justify; text-justify: inter-word; font-style: italic; margin-bottom: 10px; color: #555;">
+                <strong>Figure 5.</strong> Evaluation success rates (in-domain) on the “Pick Pen” task with varying amounts of fine-tuning data.
+              </div>
+            </div>
+          
+            <!-- 右侧文字 -->
+            <div style="flex: 1; text-align: justify; text-justify: inter-word;">
+              <strong>Data Efficiency</strong><br>
+              Even in in-domain settings, state-based policies require diverse demonstrations to avoid overfitting to specific trajectories, which greatly increases data collection costs. 
+              In contrast, State-free Policies are less prone to memorizing specific trajectories and can achieve comparable performance with fewer fine-tuning data, thereby enhancing data efficiency and practicality for real-world deployment. 
+              We validate this on the in-domain "Pick Pen" task using dual wide-angle wrist-cameras, varying the fine-tuning data to 300, 200, 100, and 50 episodes, and measuring performance after 2 and 4 fine-tuning epochs. 
+              The evaluation results show that reducing data causes state-based policies to overfit and lose success, while State-free Policies maintain much higher performance.
+            </div>
+        
+          </div>
+
+
+
+
+
+
+          <!--
+          <div class="section" style="margin-top: 50px; text-align: justify; text-justify: inter-word;">
+
+          
+
+            <div style="float: left; width: 700px; margin-right: 20px; margin-bottom: 10px; text-align: justify;">
+              <img src="imgs/data_scale.svg" alt="Data Efficienc" style="width: 100%; height: auto;">
+              <div style="margin-top: 5px; font-style: italic; color: #555; text-align: justify;">
+                <strong>Figure 5.</strong> Evaluation success rates (in-domain) on the “Pick Pen” task with varying amounts of fine-tuning data.
+              </div>
+            </div>
+          
+            <strong>Data Efficiency</strong><br>
+              Even in in-domain settings, state-based policies require diverse demonstrations to avoid overfitting to specific trajectories, which greatly increases data collection costs. 
+              In contrast, State-free Policies are less prone to memorizing specific trajectories and can achieve comparable performance with fewer fine-tuning data, thereby enhancing data efficiency and practicality for real-world deployment. 
+              We validate this on the in-domain "Pick Pen" task using dual wide-angle wrist-cameras, varying the fine-tuning data to 300, 200, 100, and 50 episodes, and measuring performance after 2 and 4 fine-tuning epochs. 
+              The evaluation results show that reducing data causes state-based policies to overfit and lose success, while State-free Policies maintain much higher performance.
+          
+
+            <div style="clear: both;"></div>
+          
+        </div>
+        -->
+          
+          
+
+
+
+          <div class="section">
+            <strong>Cross-Embodiment Fine-Tuning</strong><br>
+          
+            <!-- 三线表直接放在标题下面 -->
+            <table style="width: 100%; border-collapse: collapse; margin: 10px 0 20px 0; text-align: center;">
+              <caption style="caption-side: top; text-align: justify; text-justify: inter-word; font-style: italic; margin-bottom: 10px; color: #555;">
+                <strong>Table 2.</strong> Success rates in in-domain <em>"Fold Shirt"</em> task using the human-like robot. Each policy is fine-tuned from its corresponding checkpoint trained on Arx5 arms.
+              </caption>
+              <thead>
+                <tr>
+                  <th style="border-top: 2px solid #000; border-bottom: 2px solid #000; text-align: left; padding: 8px;">State input</th>
+                  <th style="border-top: 2px solid #000; border-bottom: 2px solid #000; padding: 8px;">Fine-tune 5k steps</th>
+                  <th style="border-top: 2px solid #000; border-bottom: 2px solid #000; padding: 8px;">Fine-tune 10k steps</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="padding: 8px; text-align: left;">w/ state</td>
+                  <td style="padding: 8px;">0.333</td>
+                  <td style="padding: 8px;">0.767</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px; text-align: left;">w/o state</td>
+                  <td style="padding: 8px; font-weight: bold;">0.700</td>
+                  <td style="padding: 8px; font-weight: bold;">0.967</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="3" style="border-top: 2px solid #000; text-align: left; padding: 8px;"></td>
+                </tr>
+              </tfoot>
+            </table>
+          
+            <p>
+              We find that State-free Policies also benefit cross-embodiment fine-tuning. For state-based policies, cross-embodiment adaptation requires aligning with a new state space, and even with EEF-based states, differences in reference frame definitions across embodiments still create gaps. 
+              In contrast, State-free Policies avoid this issue: with similar camera setups, they only need to adapt to minor image shifts, enabling more efficient cross-embodiment fine-tuning. 
+              We validate this on the "Fold Shirt" task (in-domain setting). Policies are first trained on dual-arm Arx5 (the EEF space is in table frame) and then adapted to a human-like dual-arm robot (the EEF space is in robot-centric frame). 
+              We collect 100 shirt-folding demonstrations on the human-like robot and fine-tune the π0 policy with and without state input, each initialized from its corresponding Arx5 checkpoint. 
+              The evaluation results show that State-free Policies adapt much faster across embodiments, achieving substantially higher success rates than state-based policies under the same fine-tuning epochs. 
+              This indicates that State-free Policies have better cross-embodiment ability than state-based policies.
+            </p>
+          </div>
+
+
+
+
+
+
+
+
+
+
+          <div class="section">
+            <strong>Rethinking the Sensor Design</strong><br>
+          
+            <!-- 表格直接放在标题下面 -->
+            <table style="width: 100%; border-collapse: collapse; margin: 10px 0 20px 0; text-align: center;">
+              <caption style="caption-side: top; text-align: justify; text-justify: inter-word; font-style: italic; margin-bottom: 10px; color: #555;">
+                <strong>Table 3.</strong> Success rates with and without the overhead camera in more challenging <em>"Pick Pen"</em> generalization scenarios, using dual wide-angle wrist-cameras.
+              </caption>
+              <thead>
+                <tr>
+                  <th style="border-top: 2px solid #000; border-bottom: 2px solid #000; text-align: left; padding: 8px;">Overhead camera input</th>
+                  <th style="border-top: 2px solid #000; border-bottom: 2px solid #000; padding: 8px;">Table height 100 cm</th>
+                  <th style="border-top: 2px solid #000; border-bottom: 2px solid #000; padding: 8px;">Raising pen holder height</th>
+                  <th style="border-top: 2px solid #000; border-bottom: 2px solid #000; padding: 8px;">Moving pen holder 20 cm</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="padding: 8px; text-align: left;">w/ overhead cam</td>
+                  <td style="padding: 8px;">0</td>
+                  <td style="padding: 8px;">0.467</td>
+                  <td style="padding: 8px;">0</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px; text-align: left;">w/o overhead cam</td>
+                  <td style="padding: 8px; font-weight: bold;">1.0</td>
+                  <td style="padding: 8px; font-weight: bold;">0.867</td>
+                  <td style="padding: 8px; font-weight: bold;">0.800</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="4" style="border-top: 2px solid #000; text-align: left; padding: 8px;"></td>
+                </tr>
+              </tfoot>
+            </table>
+          
+            <p>
+              After removing the state input that limits spatial generalization, we consider that the overhead camera might be another potential bottleneck. Changes in object locations can induce distribution shifts in overhead camera images, and in extreme cases (e.g., 100 cm table height) degrade performance. 
+              In contrast, since the end-effector can move along with the task-relevant object, the wrist-cameras can still capture observations consistent with those in training, avoiding out-of-domain issues. 
+              Given that the dual wide-angle wrist-cameras already provide full task observation, the overhead camera may not only be unnecessary but even harmful.
+            </p>
+          
+            <p>We evaluate this through experiments on the "Pick Pen" task under more challenging scenarios:</p>
+            <ul>
+              <li>Raising the table height to 100 cm.</li>
+              <li>Raising the pen holder to double its height, changing its relative height with respect to the table.</li>
+              <li>Moving the pen holder 20 cm away from its position in training data.</li>
+            </ul>
+          
+            <p>
+              The evaluation results show that State-free Policies with the overhead camera perform poorly across all three challenging scenarios. In contrast, without the overhead camera, success rates remain consistently high, confirming that dual wide-angle wrist-cameras alone are sufficient, while the overhead view introduces harmful shifts. 
+              This finding motivates us to rethink sensor design, perhaps removing the overhead camera, for future visuomotor policies.
+            </p>
+          </div>
+
+
+          <div class="section">
+            <strong>Conclusion</strong><br>
+            In this study, we propose State-free Policies, under two conditions: the relative end-effector (EEF) action space and full task observation through sufficiently comprehensive visual information. 
+            Without state input, these policies maintain perfect in-domain performance while achieving significant improvements in spatial generalization. 
+            State-free Policies also reduce the costly real-world data need, enable more efficient cross-embodiment adaptation, and inspire new directions in future sensor design. 
+            Our findings shed new light on how State-free Policies can serve as a foundation for building more generalizable robotic learning systems.
+          </div>
+
+
+
+
+          <div class="section" style="margin-top: 50px;">
+            <strong>BibTeX</strong><br>
+          
+            <div style="
+                background-color: #dcdad6;
+                color: #111111;
+                padding: 20px;
+                border-radius: 12px;
+                font-family: monospace;
+                font-size: 0.7em;
+                white-space: pre-wrap;
+                word-wrap: break-word;
+                text-align: left;
+                margin: 0;
+            ">
+@article{zhao2025nostate,
+  title={Do You Need Proprioceptive States in Visuomotor Policies?},
+  author={Zhao, Juntu and Lu, Wenbo and Zhang, Di and Liu, Yufeng and Liang, Yushen and Zhang, Tianluo and Cal, Yifeng and Xie, Junyuan and Hu, Yingdong and Wang, Shengjie and Guo, Junliang and Wang, Dequan and Gao, Yang},
+  journal={xxx},
+  year={2025}
+}
+            </div>
+          </div>
+
+          
+    </div>
+</body>
+</html>
