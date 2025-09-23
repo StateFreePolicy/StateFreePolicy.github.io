@@ -107,6 +107,15 @@
       justify-content: center; /* 居中排列视频 */
     }
 
+    .video-row-nohigh {
+      display: flex;
+      margin-top: 50px;
+      gap: 20px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 10px;
+    }
+
     .video-card {
       flex: 0 0 450px;     /* 固定每个卡片宽度，足够容纳标题 */
       display: flex;
@@ -159,6 +168,13 @@
       word-wrap: break-word; /* 长单词也能断开 */
       line-height: 1.4;
       max-width: 350px;      /* 限制在卡片宽度内，不会超出去 */
+    }
+    .section-title {
+      font-size: 1.6em; /* 段落标题更大的字体 */
+      font-weight: bold;
+      line-height: 1.2;
+      margin-bottom: 0.3em;
+      display: block;
     }
   </style>
 </head>
@@ -216,7 +232,7 @@
         </div>
 
         <div class="section">
-        <strong>1. Pick and Place Tasks</strong><br>
+        <span class="section-title">1. Pick and Place Tasks</span>
         We present that the State-free Policy achieves significantly stronger spatial generalization (both height and horizontal generalization) than the state-based policy across 3 real-world "Pick & Place" tasks:
         <div class="figure" style="margin-top: 20px; text-align: center;">
             <img src="imgs/exp_pick_place.svg" alt="Pick and Place Generalization" style="max-width: 100%; height: auto;">
@@ -242,16 +258,16 @@
         </div>
 
         <div class="section">
-            <strong>2. More Challenging Tasks</strong><br>
+            <span class="section-title">2. More Challenging Tasks</span>
             We also evaluate the State-free Policy in horizontal generalization on more challenging tasks: "Fold Shirt" and "Fetch Bottle (whole-body)". The State-free Policy still shows significantly improved performance compared to the state-based policy.
           
             <!-- 三线表 -->
             <table style="width: 100%; border-collapse: collapse; margin: 20px 0; text-align: center;">
               <thead>
                 <tr>
-                  <th style="border-top: 2px solid #000; border-bottom: 2px solid #000; text-align: left; padding: 8px;">Task name</th>
-                  <th style="border-top: 2px solid #000; border-bottom: 2px solid #000; padding: 8px;"><em>Fold Shirt</em></th>
-                  <th style="border-top: 2px solid #000; border-bottom: 2px solid #000; padding: 8px;"><em>Fetch Bottle</em></th>
+                  <th style="border-top: 2px solid #000; border-bottom: 2px solid #000; text-align: left; padding: 8px; font-weight: normal;">Task name</th>
+                  <th style="border-top: 2px solid #000; border-bottom: 2px solid #000; padding: 8px; font-weight: normal;"><em>Fold Shirt</em></th>
+                  <th style="border-top: 2px solid #000; border-bottom: 2px solid #000; padding: 8px; font-weight: normal;"><em>Fetch Bottle</em></th>
                 </tr>
               </thead>
               <tbody>
@@ -262,8 +278,8 @@
                 </tr>
                 <tr>
                   <td style="padding: 8px; text-align: left;">w/o state (normal wrist-camera)</td>
-                  <td style="padding: 8px; font-weight: bold;">0.834</td>
-                  <td style="padding: 8px; font-weight: bold;">0.784</td>
+                  <td style="padding: 8px;">0.834</td>
+                  <td style="padding: 8px;">0.784</td>
                 </tr>
               </tbody>
               <tfoot>
@@ -297,7 +313,7 @@
             </div>
           
             <div style="flex: 1; text-align: justify; text-justify: inter-word;">
-              <strong>Data Efficiency</strong><br>
+              <span class="section-title">Data Efficiency</span>
               Even in in-domain settings, state-based policies require diverse demonstrations to avoid overfitting to specific trajectories, which greatly increases data collection costs. 
               In contrast, State-free Policies are less prone to memorizing specific trajectories and can achieve comparable performance with fewer fine-tuning data, thereby enhancing data efficiency and practicality for real-world deployment. 
               We validate this on the in-domain "Pick Pen" task using dual wide-angle wrist-cameras, varying the fine-tuning data to 300, 200, 100, and 50 episodes, and measuring performance after 2 and 4 fine-tuning epochs. 
@@ -320,7 +336,7 @@
               <img src="imgs/data_scale.svg" alt="Data Efficienc" style="width: 100%; height: auto;">
             </div>
           
-            <strong>3. Data Efficiency</strong><br>
+            <span class="section-title">3. Data Efficiency</span>
               The state-based policy require diverse demonstrations to avoid overfitting to specific trajectories, greatly increasing the data collection cost. 
               But the State-free Policy is less prone to memorizing specific trajectories and can achieve comparable performance with fewer fine-tuning data.
               We validate this on the in-domain "Pick Pen" task using dual wide-angle wrist-cameras, varying the fine-tuning data to 300, 200, 100, and 50 episodes, and measuring performance after 2 and 4 fine-tuning epochs. 
@@ -336,7 +352,7 @@
 
 
           <div class="section">
-            <strong>4. Cross-Embodiment Fine-Tuning</strong><br>
+            <span class="section-title">4. Cross-Embodiment Fine-Tuning</span>
             The State-free Policy also benefit cross-embodiment fine-tuning, as it avoids the issue of aligning with a new state space. We validate this on the in-domain "Fold Shirt" task using the human-like robot. Policies are first trained on dual-arm Arx5 and then adapted to a human-like dual-arm robot. The evaluation results show that the State-free Policy adapt much faster across embodiments, achieving substantially higher success rates than the state-based policy under the same fine-tuning epochs. 
             This indicates that the State-free Policy have better cross-embodiment ability than the state-based policy.
           
@@ -344,9 +360,9 @@
             <table style="width: 100%; border-collapse: collapse; margin: 10px 0 20px 0; text-align: center;">
               <thead>
                 <tr>
-                  <th style="border-top: 2px solid #000; border-bottom: 2px solid #000; text-align: left; padding: 8px;">State input</th>
-                  <th style="border-top: 2px solid #000; border-bottom: 2px solid #000; padding: 8px;">Fine-tune 5k steps</th>
-                  <th style="border-top: 2px solid #000; border-bottom: 2px solid #000; padding: 8px;">Fine-tune 10k steps</th>
+                  <th style="border-top: 2px solid #000; border-bottom: 2px solid #000; text-align: left; padding: 8px; font-weight: normal;">State input</th>
+                  <th style="border-top: 2px solid #000; border-bottom: 2px solid #000; padding: 8px; font-weight: normal;">Fine-tune 5k steps</th>
+                  <th style="border-top: 2px solid #000; border-bottom: 2px solid #000; padding: 8px; font-weight: normal;">Fine-tune 10k steps</th>
                 </tr>
               </thead>
               <tbody>
@@ -357,8 +373,8 @@
                 </tr>
                 <tr>
                   <td style="padding: 8px; text-align: left;">w/o state</td>
-                  <td style="padding: 8px; font-weight: bold;">0.700</td>
-                  <td style="padding: 8px; font-weight: bold;">0.967</td>
+                  <td style="padding: 8px;">0.700</td>
+                  <td style="padding: 8px;">0.967</td>
                 </tr>
               </tbody>
               <tfoot>
@@ -379,17 +395,17 @@
 
 
           <div class="section">
-            <strong>5. Rethinking the Sensor Design</strong><br>
+            <span class="section-title">5. Rethinking the Sensor Design</span>
             We find that removing the overhead camera can further enhance the policy's spatial generalization performance. We evaluate this through experiments on the "Pick Pen" task under 3 more challenging scenarios:
           
             <!-- 表格直接放在标题下面 -->
             <table style="width: 100%; border-collapse: collapse; margin: 10px 0 20px 0; text-align: center;">
               <thead>
                 <tr>
-                  <th style="border-top: 2px solid #000; border-bottom: 2px solid #000; text-align: left; padding: 8px;">Overhead camera input</th>
-                  <th style="border-top: 2px solid #000; border-bottom: 2px solid #000; padding: 8px;">Table height 100 cm</th>
-                  <th style="border-top: 2px solid #000; border-bottom: 2px solid #000; padding: 8px;">Raising pen holder height</th>
-                  <th style="border-top: 2px solid #000; border-bottom: 2px solid #000; padding: 8px;">Moving pen holder 20 cm</th>
+                  <th style="border-top: 2px solid #000; border-bottom: 2px solid #000; text-align: left; padding: 8px; font-weight: normal;">Overhead camera input</th>
+                  <th style="border-top: 2px solid #000; border-bottom: 2px solid #000; padding: 8px; font-weight: normal;">Table height 100 cm</th>
+                  <th style="border-top: 2px solid #000; border-bottom: 2px solid #000; padding: 8px; font-weight: normal;">Raising pen holder height</th>
+                  <th style="border-top: 2px solid #000; border-bottom: 2px solid #000; padding: 8px; font-weight: normal;">Moving pen holder 20 cm</th>
                 </tr>
               </thead>
               <tbody>
@@ -401,9 +417,9 @@
                 </tr>
                 <tr>
                   <td style="padding: 8px; text-align: left;">w/o overhead cam</td>
-                  <td style="padding: 8px; font-weight: bold;">1.0</td>
-                  <td style="padding: 8px; font-weight: bold;">0.867</td>
-                  <td style="padding: 8px; font-weight: bold;">0.800</td>
+                  <td style="padding: 8px;">1.0</td>
+                  <td style="padding: 8px;">0.867</td>
+                  <td style="padding: 8px;">0.800</td>
                 </tr>
               </tbody>
               <tfoot>
@@ -413,17 +429,17 @@
               </tfoot>
             </table>
 
-            <div class="video-row2">
+            <div class="video-row-nohigh">
               <div class="video-card2">
-                <video class="original-video-pen-nohigh" src="mov/nohigh_100.mp4" controls muted></video>
+                <video class="original-video-pen-nohigh" src="mov/nohigh_100_small.mp4" controls muted></video>
                 <div class="video-caption">Without the overhead camera, table height = 100 cm</div>
               </div>
               <div class="video-card2">
-                <video class="original-video-pen-nohigh" src="mov/nohigh_double.mp4" controls muted></video>
+                <video class="original-video-pen-nohigh" src="mov/nohigh_double_small.mp4" controls muted></video>
                 <div class="video-caption">Without the overhead camera, double the pen holder height</div>
               </div>
               <div class="video-card2">
-                <video class="original-video-pen-nohigh" src="mov/nohigh_position.mp4" controls muted></video>
+                <video class="original-video-pen-nohigh" src="mov/nohigh_position_small.mp4" controls muted></video>
                 <div class="video-caption">Without the overhead camera, moving the pen holder for 20 cm</div>
               </div>
             </div>
@@ -434,7 +450,38 @@
 
 
           <div class="section">
-            <strong>Conclusion</strong><br>
+            <span class="section-title">6. Implementation Example</span>
+            State-free Policy can be easily integrated into existing visuomotor policies, requiring only the simple removal of proprioceptive state inputs from the model. For example, in the Lerobot platform's <span style="font-style: italic;"></span>π<sub>0</sub></span> policy:
+            
+            <div style="
+                background-color: #dcdad6;
+                color: #111111;
+                padding: 20px;
+                border-radius: 12px;
+                font-family: monospace;
+                font-size: 0.8em;
+                white-space: pre-wrap;
+                word-wrap: break-word;
+                text-align: left;
+                margin: 20px 0;
+            ">
+class PI0FlowMatching(nn.Module):
+    <span style="color: #228b22;"># ... other class functions ...</span>
+    def embed_suffix(self, state, noisy_actions, timestep):
+        <span style="color: #228b22;"># ... other processing ...</span>    
+        if self.use_state:
+          state_emb = self.state_proj(state)
+          embs.append(state_emb)
+          state_mask = torch.ones(bsize, nstates, dtype=torch.bool, device=device)
+          pad_masks.append(state_mask)
+          att_masks += [1]
+        <span style="color: #228b22;"># ... other processing ...</span>
+          </div>
+        </div>
+
+
+          <div class="section">
+            <span class="section-title">Conclusion</span>
             In this study, we propose State-free Policies, under two conditions: the relative end-effector (EEF) action space and full task observation through sufficiently comprehensive visual information. 
             Without state input, these policies maintain perfect in-domain performance while achieving significant improvements in spatial generalization. 
             State-free Policies also reduce the costly real-world data need, enable more efficient cross-embodiment adaptation, and inspire new directions in future sensor design. 
@@ -445,7 +492,7 @@
 
 
           <div class="section" style="margin-top: 50px;">
-            <strong>BibTeX</strong><br>
+            <span class="section-title">BibTeX</span>
           
             <div style="
                 background-color: #dcdad6;
