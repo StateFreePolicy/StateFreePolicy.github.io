@@ -18,26 +18,26 @@
       justify-content: center;
     }
     .container {
-      max-width: 1400px; /* 页面内容最大宽度 */
+      max-width: 1200px; /* 页面内容最大宽度 */
       width: 100%;
     }
     h1 {
-      font-size: 3.5em;  /* 标题再稍微大一些 */
+      font-size: 3em;  /* 标题再稍微大一些 */
       font-weight: 600;
       line-height: 1.3;
     }
     .meta {
       margin-top: 50px;
-      font-size: 1.4em; /* Published 更大 */
+      font-size: 1.2em; /* Published 更大 */
     }
     .abstract {
       margin-top: 50px;
-      font-size: 1.4em; /* Published 更大 */
+      font-size: 1.2em; /* Published 更大 */
       text-align: justify;  /* 两端对齐 */
     }
     .section {
       margin-top: 50px;
-      font-size: 1.4em; /* Published 更大 */
+      font-size: 1.2em; /* Published 更大 */
       text-align: justify;  /* 两端对齐 */
     }
     .bibtex {
@@ -49,7 +49,7 @@
     .authors {
       margin-top: 30px;
       margin-bottom: 40px;
-      font-size: 1.4em;
+      font-size: 1.2em;
       text-align: left;  /* 左对齐 */
       line-height: 1.6;
     }
@@ -71,10 +71,10 @@
       align-items: center;
       gap: 14px;
       margin-top: 50px;
-      padding: 10px 34px;
+      padding: 6px 25px;
       border: 2px dashed #555;
       font-family: monospace;
-      font-size: 1.8em;  /* Paper 按钮字体更大 */
+      font-size: 1.2em;  /* Paper 按钮字体更大 */
       background: #f8f7f2;
       cursor: pointer;
       text-decoration: none;
@@ -170,7 +170,7 @@
       max-width: 350px;      /* 限制在卡片宽度内，不会超出去 */
     }
     .section-title {
-      font-size: 1.6em; /* 段落标题更大的字体 */
+      font-size: 1.4em; /* 段落标题更大的字体 */
       font-weight: bold;
       line-height: 1.2;
       margin-bottom: 0.3em;
@@ -224,7 +224,7 @@
         </div>
 
         <div style="margin-top: 20px; text-align: center; color: #389a3b; font-size: 26px; font-weight: 900; max-width: 1300px; margin-left: auto; margin-right: auto; line-height: 1.4;">
-          <p><strong><span style="font-size: 32px;">TL;DR:</span> We propose the State-free Policy, removing the proprioceptive state input of the visuomotor policy given the full task-relevant visual observation. It achieves significantly more improved spatial generalization, data efficiency, and cross-embodiment adaptation.</strong></p>
+          <p><strong><span style="font-size: 32px;">TL;DR:</span> We propose the State-free Policy, removing the proprioceptive state input of the visuomotor policy given the full task- visual observation. It achieves significantly more improved spatial generalization, data efficiency, and cross-embodiment adaptation.</strong></p>
         </div>
 
         <div class="abstract">
@@ -337,13 +337,13 @@
 
           
 
-            <div style="float: left; width: 700px; margin-right: 20px; margin-bottom: 10px; text-align: justify;">
+            <div style="float: left; width: 600px; margin-right: 20px; margin-bottom: 10px; text-align: justify;">
               <img src="imgs/data_scale.svg" alt="Data Efficienc" style="width: 100%; height: auto;">
             </div>
           
             <span class="section-title">3. Data Efficiency</span>
               The state-based policy require diverse demonstrations to avoid overfitting to specific trajectories, greatly increasing the data collection cost. 
-              But the State-free Policy is less prone to memorizing specific trajectories and can achieve comparable performance with fewer fine-tuning data.
+              But the State-free Policy is less prone to memorizing specific trajectories and can achieve better performance with fewer fine-tuning data.
               We validate this on the in-domain "Pick Pen" task using dual wide-angle wrist-cameras, varying the fine-tuning data to 300, 200, 100, and 50 episodes, and measuring performance after 2 and 4 fine-tuning epochs. 
               The evaluation results show that reducing data causes the state-based policy to overfit and lose success, while the State-free Policy maintain much higher performance.
           
