@@ -223,6 +223,10 @@
           <video src="mov/teaser_small.mp4" controls loop muted style="width: 100%; height: auto; border-radius: 8px;"></video>
         </div>
 
+        <div style="margin-top: 20px; text-align: center; color: #389a3b; font-size: 26px; font-weight: 900; max-width: 1300px; margin-left: auto; margin-right: auto; line-height: 1.4;">
+          <p><strong><span style="font-size: 32px;">TL;DR:</span> We propose the State-free Policy, removing the proprioceptive state input of the visuomotor policy given the full task-relevant visual observation. It achieves significantly more improved spatial generalization, data efficiency, and cross-embodiment adaptation.</strong></p>
+        </div>
+
         <div class="abstract">
         <strong>Abstract -</strong>
         Imitation-learning–based visuomotor policies have been widely used in robot manipulation, where both visual observations and proprioceptive states are typically adopted together for precise control. However, in this study, we find this common practice makes the policy overly reliant on the proprioceptive state input, which causes overfitting to the training trajectories and results in poor spatial generalization. On the contrary, we propose the State-free Policy, removing the proprioceptive state and predicting actions only conditioned on visual observations. The State-free Policy is built in the relative end-effector action space, and should ensure the full task-relevant visual observations, here provided by dual wide-angle wrist cameras. Empirical results demonstrate that the State-free policy achieves significantly stronger spatial generalization than the state-based policy: in real-world tasks such as pick-and-place, challenging shirt-folding, and complex whole-body manipulation, spanning multiple robot embodi- ments, the average success rate improves from 0% to 85% in height generalization and from 6% to 64% in horizontal generalization. Furthermore, they also show advantages in data efficiency and cross-embodiment adaptation, enhancing their practicality for real-world deployment.
